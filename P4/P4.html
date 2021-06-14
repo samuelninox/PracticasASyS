@@ -105,7 +105,7 @@ set (gca, <span class="string">"yaxislocation"</span>, <span class="string">"ori
 title(<span class="string">'x(t)*h(t)'</span>)
 axis([-2 3 -2 2]);
 hold <span class="string">off</span>
- <p> </p><img vspace="5" hspace="5" src="P4_02.png" alt=""> <p>Ahora vamos a mostrarlo con el convconm.</p><pre class="codeinput">x = @(t) t.*(t&gt;=-1 &amp; t&lt;=1);
+</pre><img vspace="5" hspace="5" src="P4_02.png" alt=""> <p>Ahora vamos a mostrarlo con el convconm.</p><pre class="codeinput">x = @(t) t.*(t&gt;=-1 &amp; t&lt;=1);
 h = @(t) exp(-t).*((t&gt;=0 &amp; t&lt;=1));
 convconm3(h,x)
 hold <span class="string">off</span>
