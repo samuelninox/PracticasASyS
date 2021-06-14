@@ -109,11 +109,12 @@ set (gca, <span class="string">"yaxislocation"</span>, <span class="string">"ori
 title(<span class="string">'x(t)*h(t)'</span>)
 axis([-2 3 -2 2]);
 hold <span class="string">off</span>
-</pre><img vspace="2" hspace="2" src="P4_01.png" alt=""> <img vspace="5" hspace="5" src="P4_02.png" alt=""> <p>Ahora vamos a mostrarlo con el convconm.</p><pre class="codeinput">x = @(t) t.*(t&gt;=-1 &amp; t&lt;=1);
+</pre><img vspace="1" hspace="1" src="P4_01.png" alt="">
+ <p> </p><img vspace="5" hspace="5" src="P4_02.png" alt=""> <p>Ahora vamos a mostrarlo con el convconm.</p><pre class="codeinput">x = @(t) t.*(t&gt;=-1 &amp; t&lt;=1);
 h = @(t) exp(-t).*((t&gt;=0 &amp; t&lt;=1));
 convconm3(h,x)
 hold <span class="string">off</span>
-</pre><img vspace="5" hspace="5" src="P4_03.png" alt=""> <h2 id="5">2. PR05 - ejercicio e).</h2><p>Realiza la autocorrelaci&oacute;n de:</p><p>x(t) = u(t) - 2u(t-3) +u(t-4)</p><p>Utiliza las equivalencias que quieras.</p><pre class="codeinput">f = @(t) 1.*(t&gt;=0&amp;t&lt;3)+-1.*(t&gt;=3&amp;t&lt;4);
+</pre><img vspace="5" hspace="5" src="P1.gif" alt=""> <h2 id="5">2. PR05 - ejercicio e).</h2><p>Realiza la autocorrelaci&oacute;n de:</p><p>x(t) = u(t) - 2u(t-3) +u(t-4)</p><p>Utiliza las equivalencias que quieras.</p><pre class="codeinput">f = @(t) 1.*(t&gt;=0&amp;t&lt;3)+-1.*(t&gt;=3&amp;t&lt;4);
 t = (-5:.01:5);
 subplot(1,3,1)
 plot(t,f(t));
@@ -156,15 +157,15 @@ hold <span class="string">off</span>
 </pre><img vspace="5" hspace="5" src="P4_04.png" alt=""> <pre class="codeinput">x = @(t) 1.*(t&gt;=0&amp;t&lt;3)+-1.*(t&gt;=3&amp;t&lt;4);
 h = @(t) 1.*(t&lt;=0&amp;t&gt;-3)+-1.*(t&lt;=-3&amp;t&gt;-4);
 convconm4(h,x)
-</pre><img vspace="5" hspace="5" src="P4_05.png" alt=""> <h2 id="7">3. Convoluci&oacute;n de la se&ntilde;al del ejercio 3.1.1.</h2><p>Convoluci&oacute;n de la se&ntilde;al x[n] y h[n] de la se&ntilde;al 3.1.1.</p><pre class="codeinput">n=-4:10;
+</pre><img vspace="5" hspace="5" src="P2.gif" alt=""> <h2 id="7">3. Convoluci&oacute;n de la se&ntilde;al del ejercio 3.1.1.</h2><p>Convoluci&oacute;n de la se&ntilde;al x[n] y h[n] de la se&ntilde;al 3.1.1.</p><pre class="codeinput">n=-4:10;
 a=[0 -9 -6 -3 0 3 6 9 0 0 0 0 0 0 0];
 b=[0 0 4 2 0 2 4 0 0 0 0 0 0 0 0 ];
 convdisc3([n;a],[n;b])
-</pre><img vspace="5" hspace="5" src="P4_06.png" alt=""> <h2 id="8">4. Correlaci&oacute;n de la se&ntilde;al del ejercio 3.1.1.</h2><p>Correlaci&oacute;n de la se&ntilde;al x[n] y h[n] de la se&ntilde;al 3.1.1.</p><pre class="codeinput">n=-4:10;
+</pre><img vspace="5" hspace="5" src="P3.gif" alt=""> <h2 id="8">4. Correlaci&oacute;n de la se&ntilde;al del ejercio 3.1.1.</h2><p>Correlaci&oacute;n de la se&ntilde;al x[n] y h[n] de la se&ntilde;al 3.1.1.</p><pre class="codeinput">n=-4:10;
 a=[0 9 6 3 0 -3 -6 -9 0 0 0 0 0 0 0];
 b=[0 0 4 2 0 2 4 0 0 0 0 0 0 0 0 ];
 convdisc2([n;a],[n;b])
-</pre><img vspace="5" hspace="5" src="P4_07.png" alt=""> <h2 id="9">5. Convoluci&oacute;n de la se&ntilde;al del ejercio 3.1.1 usando otro metodo.</h2><p>Convoluci&oacute;n de la se&ntilde;al x[n] y h[n] de la se&ntilde;al 3.1.1 usando el comando conv.</p><pre class="codeinput">figure
+</pre><img vspace="5" hspace="5" src="P4.gif" alt=""> <h2 id="9">5. Convoluci&oacute;n de la se&ntilde;al del ejercio 3.1.1 usando otro metodo.</h2><p>Convoluci&oacute;n de la se&ntilde;al x[n] y h[n] de la se&ntilde;al 3.1.1 usando el comando conv.</p><pre class="codeinput">figure
 a=[0 -9 -6 -3 0 3 6 9 0 0 0 0];
 b=[0 0 4 2 0 2 4 0 0 0 0 0];
 cn = conv(b,a)
