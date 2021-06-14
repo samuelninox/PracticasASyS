@@ -67,13 +67,9 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>P04: Convoluci&oacute;n y Correlaci&oacute;n de se&ntilde;ales.</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Integrantes:</a></li><li><a href="#2">Objetivo de la practica.</a></li><li><a href="#3">1. PR04 - ejercicio 1.</a></li><li><a href="#5">2. PR05 - ejercicio e).</a></li><li><a href="#7">3. Convoluci&oacute;n de la se&ntilde;al del ejercio 3.1.1.</a></li><li><a href="#8">4. Correlaci&oacute;n de la se&ntilde;al del ejercio 3.1.1.</a></li><li><a href="#9">5. Convoluci&oacute;n de la se&ntilde;al del ejercio 3.1.1 usando otro metodo.</a></li><li><a href="#10">Referencias</a></li></ul></div><h2 id="1">Integrantes:</h2><p>Juan Pablo Jimenez Lea&ntilde;os</p><p>Samuel S&aacute;nchez Duque.</p><h2 id="2">Objetivo de la practica.</h2><p>- Conocer m&eacute;todos b&aacute;sicos de integraci&oacute;n num&eacute;rica.</p><p>- Manipulaci&oacute;n de instrucciones en MATLAB.</p><p>- Simular convoluciones y correlaciones de se&ntilde;ales continuas.</p><p>- Simular convoluciones y correlaciones de se&ntilde;ales discretas.</p><h2 id="3">1. PR04 - ejercicio 1.</h2><p>Realiza la convoluci&oacute;n de las siguientes se&ntilde;ales.</p><pre class="codeinput">[X,map] = imread(<span class="string">'E_1.jpg'</span>);
-imshow(X,map)
-<span class="comment">%</span>
-<span class="comment">% dado que el resultado analitico es:</span>
-<span class="comment">%</span>
-<span class="comment">%</span>
-<span class="comment">%</span>
+  </style></head><body><div class="content"><h1>P04: Convoluci&oacute;n y Correlaci&oacute;n de se&ntilde;ales.</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Integrantes:</a></li><li><a href="#2">Objetivo de la practica.</a></li><li><a href="#3">1. PR04 - ejercicio 1.</a></li><li><a href="#5">2. PR05 - ejercicio e).</a></li><li><a href="#7">3. Convoluci&oacute;n de la se&ntilde;al del ejercio 3.1.1.</a></li><li><a href="#8">4. Correlaci&oacute;n de la se&ntilde;al del ejercio 3.1.1.</a></li><li><a href="#9">5. Convoluci&oacute;n de la se&ntilde;al del ejercio 3.1.1 usando otro metodo.</a></li><li><a href="#10">Referencias</a></li></ul></div><h2 id="1">Integrantes:</h2><p>Juan Pablo Jimenez Lea&ntilde;os</p><p>Samuel S&aacute;nchez Duque.</p><h2 id="2">Objetivo de la practica.</h2><p>- Conocer m&eacute;todos b&aacute;sicos de integraci&oacute;n num&eacute;rica.</p><p>- Manipulaci&oacute;n de instrucciones en MATLAB.</p><p>- Simular convoluciones y correlaciones de se&ntilde;ales continuas.</p><p>- Simular convoluciones y correlaciones de se&ntilde;ales discretas.</p><h2 id="3">1. PR04 - ejercicio 1.</h2><p>Realiza la convoluci&oacute;n de las siguientes se&ntilde;ales.</p>
+</pre><img vspace="5" hspace="5" src="P4_01.png" width="300" height="250" alt="">
+<p>dado que el resultado analitico es:</p>
 <span class="comment">%Las graficas quedarian como:</span>
 <span class="comment">%</span>
 figure
@@ -109,7 +105,6 @@ set (gca, <span class="string">"yaxislocation"</span>, <span class="string">"ori
 title(<span class="string">'x(t)*h(t)'</span>)
 axis([-2 3 -2 2]);
 hold <span class="string">off</span>
-</pre><img vspace="5" hspace="5" src="P4_01.png" width="400" height="300" alt="">
  <p> </p><img vspace="5" hspace="5" src="P4_02.png" alt=""> <p>Ahora vamos a mostrarlo con el convconm.</p><pre class="codeinput">x = @(t) t.*(t&gt;=-1 &amp; t&lt;=1);
 h = @(t) exp(-t).*((t&gt;=0 &amp; t&lt;=1));
 convconm3(h,x)
