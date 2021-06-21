@@ -94,7 +94,7 @@ tf=(3*pi)/2;
 a=-12;
 b=12;
 sfc3(t0,tf,dn,d0,f,armo,a,b)
-</pre><img vspace="5" hspace="5" src="P5_03.png" alt=""> <img vspace="5" hspace="5" src="P5_04.png" alt=""> <p>Ahora lo analizaremos en la serie de fourier compacta.</p><pre class="codeinput">T0 = 2*(pi)
+</pre> <img vspace="5" hspace="5" src="P5_04.png" alt=""> <p>Ahora lo analizaremos en la serie de fourier compacta.</p><pre class="codeinput">T0 = 2*(pi)
 w0=2*pi/(tf-t0);
 f=@(t) (heaviside(t+pi/2)-heaviside(t-pi/2));
 cn=@(n) 2*abs((sin((n*pi)/2)/(pi*n)));
