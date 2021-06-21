@@ -6,7 +6,7 @@
    <!--
 This HTML was auto-generated from MATLAB code.
 To make changes, update the MATLAB code and republish this document.
-      --><title>Pr&aacute;ctica 5: Series de Fourier en tiempo continuo.</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-06-20"><meta name="DC.source" content="P5.m"><style type="text/css">
+      --><title>Pr&aacute;ctica 5: Series de Fourier en tiempo continuo.</title><meta name="generator" content="MATLAB 9.9"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2021-06-21"><meta name="DC.source" content="P5.m"><style type="text/css">
 html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
 
 html { min-height:100%; margin-bottom:1px; }
@@ -67,27 +67,116 @@ table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px soli
 
 
 
-  </style></head><body><div class="content"><h1>Pr&aacute;ctica 5: Series de Fourier en tiempo continuo.</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Integrantes:</a></li><li><a href="#2">Objetivo de la practica.</a></li><li><a href="#3">Ejemplo 6.2 del Lathi.</a></li><li><a href="#4">Ejemplo 6.4 del Lathi.</a></li><li><a href="#5">PR10</a></li></ul></div><h2 id="1">Integrantes:</h2><p>Juan Pablo Jimenez Lea&ntilde;os</p><p>Samuel S&aacute;nchez Duque.</p><h2 id="2">Objetivo de la practica.</h2><p>- Realizar gr&aacute;ficas de series de Fourier exponenciales y trigonom&eacute;tricas en tiempo continuo.</p><p>- Manipulaci&oacute;n de instrucciones en MATLAB.</p><h2 id="3">Ejemplo 6.2 del Lathi.</h2><p>Find the compact trigonometric Fourier series for the triangular periodic signal x(t) shown in Fig. 6.4a, and sketch the amplitude and phase spectra for x(t)</p><pre class="codeinput">clear;
-u = @ (t) heaviside(t);
-f = @ (t) (2.*t.*(u(t+.5)-u(t-0.5)))-((2-(2.*t)).*(-u(t-0.5)+u(t-1.5)));
+  </style></head><body><div class="content"><h1>Pr&aacute;ctica 5: Series de Fourier en tiempo continuo.</h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Integrantes:</a></li><li><a href="#2">Objetivo de la practica.</a></li><li><a href="#3">Ejemplo 6.2 del Lathi.</a></li><li><a href="#6">Ejercicio 6.4 del Lathi.</a></li></ul></div><h2 id="1">Integrantes:</h2><p>Juan Pablo Jimenez Lea&ntilde;os</p><p>Samuel S&aacute;nchez Duque.</p><h2 id="2">Objetivo de la practica.</h2><p>- Realizar gr&aacute;ficas de series de Fourier exponenciales y trigonom&eacute;tricas en tiempo continuo.</p><p>- Manipulaci&oacute;n de instrucciones en MATLAB.</p><h2 id="3">Ejemplo 6.2 del Lathi.</h2><p>Find the compact trigonometric Fourier series for the triangular periodic signal x(t) shown in Fig. 6.4a, and sketch the amplitude and phase spectra for x(t)</p><pre class="codeinput">u =@(t) heaviside(t);
+f =@(t) (2*t.*(u(t+.5)-u(t-0.5)))-((2-2*t).*(-u(t-0.5)+u(t-1.5)));
+armo=15;
 d0=0;
-dn=@(n) (2*j*(2*sin((n*pi)/2) - n*pi*cos((n*pi)/2))*(cos((n*pi)/2)^2 - 1))/(n^2*pi^2);
+dn=@(n) (2*j*(2*sin((n*pi)/2)-n*pi*cos((n*pi)/2))*(cos((n*pi)/2)^2 - 1))/(n^2*pi^2);
 t0=-0.5;
 tf=1.5;
-armo=15;
 a=-2;
 b=2;
-sfc(t0,tf,dn,d0,f,armo,a,b);
-</pre><img vspace="5" hspace="5" src="P5_01.png" alt=""> <h2 id="4">Ejemplo 6.4 del Lathi.</h2><p>Find the compact trigonometric Fourier series for the square-pulse periodic signal shown in Fig. 6.6a and sketch its Fourier spectrum.</p><pre class="codeinput">g = @ (t) u(t+pi/2)-u(t-pi/2);
-d0=.5;
+sfc(t0,tf,dn,d0,f,armo,a,b)
+</pre><img vspace="5" hspace="5" src="P5_01.png" alt=""> <p>Ahora lo analizaremos en la serie de fourier compacta.</p><p>Tomamos an y bn para sacar el angulo.</p><p>an = @(n) (2/T0)*int(2*t*cos(n*w0*t)) + (2/T0)*int(2*(1-t)*cos(n*w0*t));</p><p>bn = @(n) (2/T0)*int(2*t*sin(n*w0*t),t,-1/2,1/2) + (2/T0)*int(2*(1-t)*sin(n*w0*t),t,1/2,3/2);</p><p>cn = simplify(sqrt(bn^2))</p><p>phin = atan2(-bn,an)</p><p>Ahora necesitamos el cn.</p><pre class="codeinput">cn=@(n) (8*abs(((2*sin((n*pi)/2)-n*pi*cos((n*pi)/2))*(cos((n*pi)/2)^2-1))))/(n^2*pi^2);
+c0=0;
+x= pi;
+x0=0;
+sfc2(t0,tf,c0,cn,f,armo,a,b,x0,x);
+hold <span class="string">off</span>;
+clear;
+</pre><img vspace="5" hspace="5" src="P5_02.png" alt=""> <h2 id="6">Ejercicio 6.4 del Lathi.</h2><p>Find the compact trigonometric Fourier series for the square-pulse periodic signal shown in Fig. 6.6a and sketch its Fourier spectrum</p><pre class="codeinput">u =@(t) heaviside(t);
+f =@(t) u(t+(pi/2))-u(t-(pi/2));
+armo=15;
+d0=1/2;
 dn=@(n) (sin((n*pi)/2)/(pi*n));
 t0=-pi/2;
 tf=(3*pi)/2;
-armo=15;
-a=-2;
-b=4;
-sfc3(t0,tf,dn,d0,g,armo,a,b);
-</pre><img vspace="5" hspace="5" src="P5_02.png" alt=""> <h2 id="5">PR10</h2><p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
+a=-12;
+b=12;
+sfc3(t0,tf,dn,d0,f,armo,a,b)
+</pre><img vspace="5" hspace="5" src="P5_03.png" alt=""> <img vspace="5" hspace="5" src="P5_04.png" alt=""> <p>Ahora lo analizaremos en la serie de fourier compacta.</p><pre class="codeinput">T0 = 2*(pi)
+w0=2*pi/(tf-t0);
+f=@(t) (heaviside(t+pi/2)-heaviside(t-pi/2));
+cn=@(n) 2*abs((sin((n*pi)/2)/(pi*n)));
+c0=abs(d0);
+x0=0;
+x=@(n) pi*(mod(n,3)==0) + pi*(mod(n,4)==0) + pi*(n==7)+ pi*(n==11) - pi*(n==9) - pi*(n==6)- pi*(n==12);
+sf=c0*cos(x0);
+t= (2)*(-T0):0.001:(2)*(T0);
+<span class="keyword">for</span> n=1:armo
+  sf=sf+cn(n)*cos((n*w0*t) + x(n));
+<span class="keyword">end</span>
+figure (4);
+hFigg = figure(4);
+set(hFigg, <span class="string">'Position'</span>, [0 0 900 900])
+subplot(3,2,1)
+plot(t,sf,<span class="string">'LineWidth'</span>,2)
+grid <span class="string">on</span>
+legend(<span class="string">'Serie de Fourier'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis([2.5*(-T0) 2.5*(T0) -0.5 1.5])
+sf=abs(c0);
+t=(-T0/2):0.0001:(T0/2);
+<span class="keyword">for</span> n=1:armo
+  sf=sf+cn(n)*cos((n*w0*t) + x(n));
+<span class="keyword">end</span>
+subplot(3,2,2)
+plot(t,f(t),<span class="string">'r'</span>,<span class="string">'LineWidth'</span>,0.75)
+grid <span class="string">on</span>
+hold <span class="string">on</span>
+plot(t,sf,<span class="string">'b'</span>,<span class="string">'LineWidth'</span>,1.5)
+legend(<span class="string">'Funci&oacute;n original'</span>,<span class="string">'Serie de Fourier '</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+subplot(3,2,4)
+Et=f(t)-sf;
+plot(t,Et,<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Error'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+subplot(3,2,6)
+area(t,Et.^2)
+legend(<span class="string">'Energia del error'</span>,<span class="string">'Location'</span>,<span class="string">'Best'</span>)
+xlabel(<span class="string">'t'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+axis <span class="string">auto</span>
+grid <span class="string">on</span>
+nn=0:armo;
+abscn=zeros(1,length(nn));
+cont=1;
+<span class="keyword">for</span> i =0:armo
+    <span class="keyword">if</span> i==0
+        abscn(cont)=c0;
+    <span class="keyword">end</span>
+
+    abscn(cont)=cn(i);
+    cont=cont+1;
+<span class="keyword">end</span>
+nn=0:armo;
+absdnn=zeros(1,length(nn));
+cont=1;
+<span class="keyword">for</span> i =0:armo
+    <span class="keyword">if</span> i==0
+        absdnn(cont)=d0;
+    <span class="keyword">end</span>
+
+    absdnn(cont)=dn(i);
+    cont=cont+1;
+<span class="keyword">end</span>
+subplot(3,2,3)
+stem(w0*nn,abs(abscn),<span class="string">'LineWidth'</span>,2)
+title(<span class="string">'Espectro de magnitud D_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+subplot(3,2,5) <span class="comment">% %</span>
+stem(w0*nn,angle(absdnn),<span class="string">'LineWidth'</span>,2) <span class="comment">% %</span>
+title(<span class="string">'Espectro de fase, \angle de D_n '</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16) <span class="comment">% %</span>
+xlabel(<span class="string">'\omega'</span>,<span class="string">'FontWeight'</span>,<span class="string">'bold'</span>,<span class="string">'FontSize'</span>,16)
+grid <span class="string">on</span>
+</pre><pre class="codeoutput">
+
+
+</pre><img vspace="5" hspace="5" src="P5_06.png" alt=""> <p class="footer"><br><a href="https://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2020b</a><br></p></div><!--
 ##### SOURCE BEGIN #####
 %% Práctica 5: Series de Fourier en tiempo continuo.
 %
@@ -110,36 +199,138 @@ sfc3(t0,tf,dn,d0,g,armo,a,b);
 % Find the compact trigonometric Fourier series for the triangular periodic signal x(t) shown in
 % Fig. 6.4a, and sketch the amplitude and phase spectra for x(t)
 %
-clear;
-u = @ (t) heaviside(t); 
-f = @ (t) (2.*t.*(u(t+.5)-u(t-0.5)))-((2-(2.*t)).*(-u(t-0.5)+u(t-1.5)));
+u =@(t) heaviside(t); 
+f =@(t) (2*t.*(u(t+.5)-u(t-0.5)))-((2-2*t).*(-u(t-0.5)+u(t-1.5)));
+armo=15;
 d0=0;
-dn=@(n) (2*j*(2*sin((n*pi)/2) - n*pi*cos((n*pi)/2))*(cos((n*pi)/2)^2 - 1))/(n^2*pi^2);
+dn=@(n) (2*j*(2*sin((n*pi)/2)-n*pi*cos((n*pi)/2))*(cos((n*pi)/2)^2 - 1))/(n^2*pi^2);
 t0=-0.5;
 tf=1.5;
-armo=15;
 a=-2;
 b=2;
-sfc(t0,tf,dn,d0,f,armo,a,b);
-%% Ejemplo 6.4 del Lathi.
+sfc(t0,tf,dn,d0,f,armo,a,b)
+%%
 %
+% Ahora lo analizaremos en la serie de fourier compacta.
+%
+% Tomamos an y bn para sacar el angulo.
+%
+% an = @(n) (2/T0)*int(2*t*cos(n*w0*t)) + (2/T0)*int(2*(1-t)*cos(n*w0*t));
+%
+% bn = @(n) (2/T0)*int(2*t*sin(n*w0*t),t,-1/2,1/2) + (2/T0)*int(2*(1-t)*sin(n*w0*t),t,1/2,3/2);
+%
+% cn = simplify(sqrt(bn^2))
+%
+% phin = atan2(-bn,an)
+%%
+% 
+% Ahora necesitamos el cn.
+%
+cn=@(n) (8*abs(((2*sin((n*pi)/2)-n*pi*cos((n*pi)/2))*(cos((n*pi)/2)^2-1))))/(n^2*pi^2);
+c0=0;
+x= pi;
+x0=0;
+sfc2(t0,tf,c0,cn,f,armo,a,b,x0,x);
+hold off;
+clear;
+%% Ejercicio 6.4 del Lathi.
+% 
 % Find the compact trigonometric Fourier series for the square-pulse periodic signal shown in
-% Fig. 6.6a and sketch its Fourier spectrum.
+% Fig. 6.6a and sketch its Fourier spectrum
 %
-g = @ (t) u(t+pi/2)-u(t-pi/2);
-d0=.5;
+u =@(t) heaviside(t); 
+f =@(t) u(t+(pi/2))-u(t-(pi/2));
+armo=15;
+d0=1/2;
 dn=@(n) (sin((n*pi)/2)/(pi*n));
 t0=-pi/2;
 tf=(3*pi)/2;
-armo=15;
-a=-2;
-b=4;
-sfc3(t0,tf,dn,d0,g,armo,a,b);
-%% PR10
+a=-12;
+b=12;
+sfc3(t0,tf,dn,d0,f,armo,a,b)
+%%
+% 
+% Ahora lo analizaremos en la serie de fourier compacta.
 %
-%
-%
-
+T0 = 2*(pi)
+w0=2*pi/(tf-t0);
+f=@(t) (heaviside(t+pi/2)-heaviside(t-pi/2));
+cn=@(n) 2*abs((sin((n*pi)/2)/(pi*n)));
+c0=abs(d0);
+x0=0;
+x=@(n) pi*(mod(n,3)==0) + pi*(mod(n,4)==0) + pi*(n==7)+ pi*(n==11) - pi*(n==9) - pi*(n==6)- pi*(n==12);
+sf=c0*cos(x0);
+t= (2)*(-T0):0.001:(2)*(T0);
+for n=1:armo
+  sf=sf+cn(n)*cos((n*w0*t) + x(n));
+end
+figure (4);
+hFigg = figure(4);
+set(hFigg, 'Position', [0 0 900 900])
+subplot(3,2,1)
+plot(t,sf,'LineWidth',2)
+grid on
+legend('Serie de Fourier','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis([2.5*(-T0) 2.5*(T0) -0.5 1.5])
+sf=abs(c0);
+t=(-T0/2):0.0001:(T0/2);
+for n=1:armo
+  sf=sf+cn(n)*cos((n*w0*t) + x(n));
+end
+subplot(3,2,2)
+plot(t,f(t),'r','LineWidth',0.75)
+grid on
+hold on
+plot(t,sf,'b','LineWidth',1.5)
+legend('Función original','Serie de Fourier ','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+subplot(3,2,4)
+Et=f(t)-sf;
+plot(t,Et,'LineWidth',2)
+title('Error','FontWeight','bold','FontSize',16)
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+subplot(3,2,6)
+area(t,Et.^2)
+legend('Energia del error','Location','Best')
+xlabel('t','FontWeight','bold','FontSize',16)
+axis auto
+grid on
+nn=0:armo;
+abscn=zeros(1,length(nn));
+cont=1;
+for i =0:armo
+    if i==0
+        abscn(cont)=c0;
+    end
+    
+    abscn(cont)=cn(i);
+    cont=cont+1;
+end
+nn=0:armo;
+absdnn=zeros(1,length(nn));
+cont=1;
+for i =0:armo
+    if i==0
+        absdnn(cont)=d0;
+    end
+    
+    absdnn(cont)=dn(i);
+    cont=cont+1;
+end
+subplot(3,2,3)
+stem(w0*nn,abs(abscn),'LineWidth',2)
+title('Espectro de magnitud D_n ','FontWeight','bold','FontSize',16)
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
+subplot(3,2,5) % % 
+stem(w0*nn,angle(absdnn),'LineWidth',2) % % 
+title('Espectro de fase, \angle de D_n ','FontWeight','bold','FontSize',16) % % 
+xlabel('\omega','FontWeight','bold','FontSize',16)
+grid on
 
 
 
